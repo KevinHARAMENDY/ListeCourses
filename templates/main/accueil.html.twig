@@ -13,25 +13,25 @@
             </div>
         </div>
 
-        <hr>
-
-        <table class="table">
-            <thead>
-                <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Obtenu</th>
-                <th scope="col">Supprimer</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for c in courses %}
-                <tr>
-                <td><div {% if c.pris == true %}{{"style='text-decoration: line-through;color:grey'"}}{% endif %}>{{c.nom}}</div></td>
-                <td><a href="{{ path('got',{'id':c.id}) }}" class="btn btn-warning"><i class="fas fa-random"></i></a></td>
-                <td><a href="{{ path('del',{'id':c.id}) }}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div style="margin-top:2%">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Obtenu</th>
+                    <th scope="col">Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in courses %}
+                    <tr>
+                    <td><div {% if c.pris == true %}{{"style='text-decoration: line-through;color:grey'"}}{% endif %}>{{c.nom}}</div></td>
+                    <td><a href="{{ path('got',{'id':c.id}) }}" class="btn btn-warning"><i class="fas fa-random"></i></a></td>
+                    <td><a href="{{ path('del',{'id':c.id}) }}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}
