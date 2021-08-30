@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Liste de courses</h1>
+    <div>
+        {{form_start(form)}}
+        {{form_widget(form)}}
+        <input type="submit" value="Ajouter">
+        {{form_end(form)}}
+    </div>
+
+    <hr>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Liste</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for c in courses %}
+        <tr>
+            <td><div {% if c.pris == true %}{{"style='text-decoration: line-through'"}}{% endif %}>{{c.nom}}</div></td>
+            <td><a href="{{ path('got',{'id':c.id}) }}">Obtenu</a></td>
+            <td><a href="{{ path('del',{'id':c.id}) }}">Supprimer</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
