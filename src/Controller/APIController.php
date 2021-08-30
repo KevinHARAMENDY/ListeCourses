@@ -17,19 +17,18 @@ class APIController extends AbstractController
      */
     public function list(CourseRepository $cr): Response
     {
-        $courses = $cr->findAll();
-        return $this->json($courses);
+        return $this->json($cr->findAll());
     }
 
     /**
      * @Route("/api/courses", name="api_add", methods={"POST"})
      */
-    public function add(Request $req, EntityManagerInterface $em, CourseRepository $cr): Response
+    public function add(Request $req, EntityManagerInterface $em): Response
     {
         $objet = json_decode($req->getContent());
         $c = new Course();
         $c->setNom($objet->nom);
-        $c->setPris($objet->pris);
+        $c->setPris(false);
         $em->persist($c);
         $em->flush();
         
@@ -39,7 +38,7 @@ class APIController extends AbstractController
     /**
      * @Route("/api/courses/{id}", name="api_edit", methods={"PUT"})
      */
-    public function edit(Course $c, Request $req, EntityManagerInterface $em, CourseRepository $cr): Response
+    public function edit(Course $c, Request $req, EntityManagerInterface $em): Response
     {
        $objet = json_decode($req->getContent());
        $c->setNom($objet->nom);
@@ -58,7 +57,6 @@ class APIController extends AbstractController
         $em->remove($c);
         $em->flush();
 
-        $courses = $cr->findAll();
-        return $this->json($courses);
+        return $this->json($cr->findAll());
     }
 }
