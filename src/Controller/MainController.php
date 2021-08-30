@@ -28,14 +28,16 @@ class MainController extends AbstractController
             $course->setPris(false);
             $em->persist($course);
             $em->flush();
+
+            return $this->redirectToRoute("accueil");
+        } else {
+            $courses = $cr->findAll();
+
+            return $this->render('main/accueil.html.twig', [
+                "courses" => $courses,
+                "form" => $form->createView()
+            ]);
         }
-
-        $courses = $cr->findAll();
-
-        return $this->render('main/accueil.html.twig', [
-            "courses" => $courses,
-            "form" => $form->createView()
-        ]);
     }
 
     /**
