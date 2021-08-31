@@ -40,10 +40,9 @@ class APIController extends AbstractController
      */
     public function edit(Course $c, Request $req, EntityManagerInterface $em): Response
     {
-       $objet = json_decode($req->getContent());
-       $c->setNom($objet->nom);
-       $c->setPris($objet->pris);
-       $em->persist($c);
+       //$objet = json_decode($req->getContent());
+       //$c->setNom($objet->nom);
+       $c->setPris(!$c->getPris());
        $em->flush();
        
        return $this->json($c);
